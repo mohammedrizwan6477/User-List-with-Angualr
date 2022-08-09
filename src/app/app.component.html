@@ -1,0 +1,199 @@
+<!-- <h1>Welcome to {{ title }}</h1> -->
+
+<div class="card">
+  <div class="card-header"><h4>User Ragistered</h4></div>
+  <div class="card-body">
+    <ul ngbNav #nav="ngbNav" class="nav-tabs" activeId="addtab">
+      <li ngbNavItem="addtab">
+        <a ngbNavLink>Add Users</a>
+        <ng-template ngbNavContent>
+          <form
+            [formGroup]="addform"
+            (ngSubmit)="ragister()"
+            style="padding-top: 18px"
+          >
+            <div class="row g-3">
+              <div class="form-group col">
+                <label>Title</label>
+                <select class="form-control" formControlName="title" [ngClass]="{'is-invalid' : submitted && ctrl['title'].errors}">
+                  <option value="" >--Select Title--</option>
+                  <option value="Mr">Mr</option>
+                  <option value="Mrs">Mrs</option>
+                  <option value="Miss">Miss</option>
+                  <option value="Ms">Ms</option>
+                </select>
+                <div class="invalid-feedback" *ngIf="submitted && ctrl['title'].errors">
+                  <div *ngIf="ctrl['title'].errors['required']"></div>
+                    Title is required !!
+                </div>
+              </div>
+
+              <div class="form-group col-5">
+                <label for="">First Name</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  formControlName="firstname"
+                  [ngClass]="{'is-invalid' : submitted && ctrl['firstname'].errors}"
+                />
+                <div class="invalid-feedback" *ngIf="submitted && ctrl['firstname'].errors">
+                    <div *ngIf="ctrl['firstname'].errors['required']"></div>
+                    First Name is required !!
+                </div>
+                <div class="invalid-feedback" *ngIf="submitted && ctrl['minLength'].errors">
+                    <div *ngIf="ctrl['firstname'].errors['required']"></div>
+                    First Name should be min 3 char long !!
+                </div>
+                <div class="invalid-feedback" *ngIf="submitted && ctrl['maxLength'].errors">
+                    <div *ngIf="ctrl['firstname'].errors['required']"></div>
+                    First Name must be max 10 char long !!
+                </div>
+              </div>
+
+              <div class="form-group col-5">
+                <label for="">Last Name</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  formControlName="lastname"
+                  [ngClass]="{'is-invalid' : submitted && ctrl['lastname'].errors}"
+                />
+                <div class="invalid-feedback" *ngIf="submitted && ctrl['lastname'].errors">
+                    <div *ngIf="ctrl['lastname'].errors['required']"></div>
+                    Last Name is required !!
+                </div>
+                <div class="invalid-feedback" *ngIf="submitted && ctrl['minlength'].errors">
+                    <div *ngIf="ctrl['lastname'].errors['required']"></div>
+                    Last Name should be min 3 char long !!
+                </div>
+                <div class="invalid-feedback" *ngIf="submitted && ctrl['maxlength'].errors">
+                    <div *ngIf="ctrl['lastname'].errors['required']"></div>
+                    Last Name must be max 10 char long !!
+                </div>
+              </div>
+               
+              <div class="form-group col-5">
+                <label for="">Date of Birth</label>
+                <input type="date" class="form-control" formControlName="dob"
+                [ngClass]="{'is-invalid' : submitted && ctrl['dob'].errors}" />
+                <div class="invalid-feedback" *ngIf="submitted && ctrl['dob'].errors">
+                    <div *ngIf="ctrl['dob'].errors['required']"></div>
+                    Date of Birth is required !!
+                    <div *ngIf="ctrl['dob'].errors['pattern']"></div>
+                    Date of Birth must be a valid date in the format YYYY-MM-DD !!
+                </div>
+
+              </div>
+              <div class="form-group col-5">
+                <label for="">Email</label>
+                <input
+                  type="email"
+                  class="form-control"
+                  formControlName="email"
+                  [ngClass]="{'is-invalid' : submitted && ctrl['email'].errors}"
+                />
+                <div class="invalid-feedback" *ngIf="submitted && ctrl['email'].errors">
+                    <div *ngIf="ctrl['email'].errors['required']"></div>
+                    email is required !!
+                </div>
+              </div>
+
+              <div class="row g-3">
+                <div class="form-group col-5">
+                  <label for="">Password</label>
+                  <input
+                    type="password"
+                    class="form-control"
+                    formControlName="password"
+                    [ngClass]="{'is-invalid' : submitted && ctrl['password'].errors}"
+                  />
+                  <div class="invalid-feedback" *ngIf="submitted && ctrl['password'].errors">
+                    <div *ngIf="ctrl['password'].errors['required']"></div>
+                    password must be correct is required !!
+                  </div>
+                </div>
+
+                <div class="form-group col-5">
+                  <label for="">Confirm Password</label>
+                  <input
+                    type="password"
+                    class="form-control"
+                    formControlName="confirmpassword"
+                    [ngClass]="{'is-invalid' : submitted && ctrl['confirmpassword'].errors}"
+                  />
+                  <div class="invalid-feedback" *ngIf="submitted && ctrl['confirmpassword'].errors">
+                    <div *ngIf="ctrl['confirmpassword'].errors['required']"></div>
+                    confirm password is required !!
+                  </div>
+                </div>
+
+              </div>
+              <div class="row g-3">
+                <div class="form-group col form-check">
+                  <input
+                    type="checkbox"
+                    class="form-check-input"
+                    formControlName="acceptTerms"
+                    [ngClass]="{'is-invalid' : submitted && ctrl['acceptTerms'].errors}"
+                  />
+                  <div class="invalid-feedback" *ngIf="submitted && ctrl['acceptTerms'].errors">
+                    <div *ngIf="ctrl['acceptTerms'].errors['required']"></div>
+                    Accept Terms & Conditions is required !!
+                </div>
+                  <label for="acceptTerms" class="form-check-label">
+                    Accept Terms & Conditions
+                  </label>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="form-group">
+                <button type="submit" class="btn btn-success me-1">Save</button>
+                <button
+                  type="button"
+                  class="btn btn-danger"
+                  (click)="resetForm()"
+                >
+                  Cancel
+                </button>
+              </div>
+            </div>
+          </form>
+        </ng-template>
+      </li>
+      <li ngbNavItem>
+        <a ngbNavLink>User List</a>
+        <ng-template ngbNavContent>
+          <div class="form-row" style="padding-top: 18px">
+            <div class="form-group col">
+              <table class="table table-bordered">
+                <tr>
+                  <th>Title</th>
+                  <th>First Name</th>
+                  <th>Last Name</th>
+                  <th>Email</th>
+                  <th>DOB</th>
+                  <th>Action</th>
+                </tr>
+                <tr *ngFor="let data of users">
+                  <td>{{data.title}}</td>
+                  <td>{{data.firstname}}</td>
+                  <td>{{data.lastname}}</td>
+                  <td>{{data.email}}</td>
+                  <td>{{data.dob}}</td>
+                  <td>
+                    <i class="fa fa-edit" style="color: green;" (click)="edit()"></i>
+                    <i class="fa fa-trash-o" style="color: red;" (click)="delete()"></i>
+                  </td>
+                </tr>
+              </table>
+            </div>
+          </div>
+        </ng-template>
+      </li>
+    </ul>
+
+    <div [ngbNavOutlet]="nav" class="mt-2"></div>
+  </div>
+</div>
